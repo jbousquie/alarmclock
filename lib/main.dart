@@ -30,15 +30,24 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatelessWidget {
   final String title;
+  static TextStyle timeStyle = TextStyle(color: Colors.black.withOpacity(0.8));
+  static TextStyle dateStyle = TextStyle(fontSize: 12, color: Colors.black.withOpacity((0.6)));
   const MyHomePage({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
-    final timeString = Provider.of<Clock>(context, listen: true).timeString;
+    final Clock clock = Provider.of<Clock>(context, listen: true);
+    final String timeString = clock.timeString;
+    final String dateString = clock.dateString;
+    final RichText timeText = RichText(
+        text: TextSpan(style: DefaultTextStyle.of(context).style, children: <TextSpan>[
+      TextSpan(text: '$timeString\n', style: timeStyle),
+      TextSpan(text: dateString, style: dateStyle)
+    ]));
     Widget mat = Material(
         child: Container(
       alignment: const Alignment(-0.2, -0.2),
-      child: Text(timeString),
+      child: timeText,
     ));
     return mat;
   }
