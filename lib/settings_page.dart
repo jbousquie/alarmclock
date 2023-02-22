@@ -21,8 +21,18 @@ class SettingsPage extends StatelessWidget {
     return timeWidget;
   }
 
+  Widget buildBackButton(BuildContext context) {
+    final BackButton bb = BackButton(
+      onPressed: () => Navigator.pop(context),
+    );
+    return bb;
+  }
+
   Widget buildContent(BuildContext context) {
-    List<Widget> childrenList = [buildCurrentTime(context)];
+    List<Widget> childrenList = [
+      buildCurrentTime(context),
+      buildBackButton(context)
+    ];
     return Padding(
         padding: const EdgeInsets.all(12.0),
         child: Column(

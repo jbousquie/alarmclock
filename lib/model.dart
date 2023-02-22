@@ -5,11 +5,13 @@ import 'package:intl/date_symbol_data_local.dart';
 //import 'package:shared_preferences/shared_preferences.dart';
 
 class Clock extends ChangeNotifier {
-  static int intervalDuration = 1; // duration in seconds between two timer recalls
+  static int intervalDuration = 1; // duration in sec between two timer recalls
+  static int settingsPageDuration = 3; // Settings page timeout in sec
   late Timer timer;
 
   String timeString = '';
   String dateString = '';
+  bool settingsIdle = true;
 
   Clock() {
     initializeDateFormatting('fr_FR', null).then((_) => updateTime());
